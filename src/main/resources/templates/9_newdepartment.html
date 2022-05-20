@@ -1,0 +1,98 @@
+<!--
+    Name: Manik Setia
+    Student number: r0912182
+-->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>New department</title>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.css}">
+
+    <!-- custom stylesheet-->
+    <link th:href="@{/img/style.css}" rel="stylesheet" type="text/css"/>
+
+    <!--    favicon-->
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/favicon/apple-touch-icon.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon/favicon-16x16.png}">
+    <link rel="manifest" th:href="@{/favicon/site.webmanifest}">
+    <link rel="mask-icon" th:href="@{/favicon/safari-pinned-tab.svg}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <style>
+        p {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div>
+        <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <a class="navbar-brand" th:href="@{/}">
+                <img style="margin-left: 15px;" th:src="@{/favicon/favicon.ico}"/>
+            </a>
+
+            <div class="collapse navbar-collapse" id="topNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <h2 class="nav-link">Supermarket project - Manik Setia</h2>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <h3 style="padding: 10px; margin-bottom: 0">New department</h3>
+    <form th:action="@{/departments/show}" th:object="${department}">
+        <p>
+            <label for="departmentName">Department name: </label>
+            <input type="text" id="departmentName" name="departmentName"
+            >
+        </p>
+
+        <p>
+            <label for="photo">Photo: </label>
+            <input type="text" id="photo" name="photo" style="position: absolute; top: 191px; left: 162px;">
+        </p>
+
+        <p>
+            <label for="refrigerated">Refrigerated:</label>
+            <input type="checkbox" th:field="*{refrigerated}" id="refrigerated"
+                   style="position: absolute; top: 246px; left: 162px;">
+        </p>
+        <p style="padding: 10px;">
+            <select name="supermarketIndex">
+                <option value="-1">In which supermarket?</option>
+                <option th:each="supermarket: ${supermarkets}"
+                        th:text="${supermarket.getName()}"
+                        th:value="${supermarketStat.index}"/>
+            </select>
+        </p>
+
+        <p style="padding: 10px;">
+            <select name="staffMemberIndex">
+                <option value="-1">Who is responsible for this department?</option>
+                <option th:each="staffmember: ${staffmembers}"
+                        th:text="${staffmember.getFirstName()}+' '+${staffmember.getSurName()}"
+                        th:value="${staffmemberStat.index}"/>
+            </select>
+        </p>
+
+        <input type="submit" value="Confirm department" class="btn btn-success" style="margin: 10px;">
+    </form>
+
+    <p style="margin-left: 10px; margin-bottom: 137px;">
+        <a th:href="@{/}">Back to home page</a>
+    </p>
+    <!--footer-->
+    <footer class="bg-dark text-center text-white">
+        <p class="footer">Supermarket Panel - Copyright &copy; Manik</p>
+    </footer>
+</div>
+</body>
+</html>
